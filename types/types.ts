@@ -1,9 +1,10 @@
 import { User } from "next-auth";
 
 export interface IPost {
+  commentId?: string;
   id: string;
   image: string;
-  tag: string;
+  userTag: string;
   text: string;
   timestamp: string;
   userImg: string;
@@ -14,5 +15,3 @@ export interface ExtendedUserType extends User {
   tag?: string;
   uid?: string;
 }
-
-export interface ILike {}

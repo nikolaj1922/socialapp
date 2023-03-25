@@ -20,6 +20,8 @@ import {
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useSession } from "next-auth/react";
 import { ExtendedUserType } from "@/types/types";
+import CircularProgress from "@mui/material/CircularProgress";
+import { grey } from "@mui/material/colors";
 
 const Input = () => {
   const [input, setInput] = useState("");
@@ -60,7 +62,7 @@ const Input = () => {
       id: (session?.user as ExtendedUserType).uid,
       username: session?.user?.name,
       userImg: session?.user?.image,
-      tag: (session?.user as ExtendedUserType).tag,
+      userTag: (session?.user as ExtendedUserType).tag,
       text: input,
       timestamp: serverTimestamp(),
     });
@@ -84,10 +86,15 @@ const Input = () => {
 
   return (
     <div
-      className={`border-b border-gray-700 p-3 flex space-x-3 ${
+      className={`relative border-b border-gray-700 p-3 flex space-x-3 ${
         loading && "opacity-60"
       }`}
     >
+      {loading && (
+        <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-50">
+          <CircularProgress sx={{ color: grey[600] }} />
+        </div>
+      )}
       <img
         src={session?.user?.image as string}
         alt="Avatar"
@@ -101,9 +108,10 @@ const Input = () => {
             onChange={(e) => setInput(e.target.value)}
             placeholder="What`s happening?"
             rows={2}
+            disabled={loading}
           />
           {selectedFile && (
-            <div className="relative">
+            <div className="relative max-w-[90%]">
               <div
                 className="absolute w-8 h-8 bg-[#15181c]/75 hover:bg-[#272c26] rounded-full flex items-center justify-center top-1 left-1 cursor-pointer transition duration-200"
                 onClick={() => setSelectedFile(null)}
@@ -113,7 +121,7 @@ const Input = () => {
               <img
                 src={selectedFile!}
                 alt="Post image"
-                className="rounded-2xl max-h-80 object-contain"
+                className="rounded-md max-h-80 object-contain"
               />
             </div>
           )}
@@ -129,6 +137,7 @@ const Input = () => {
                 <input
                   type="file"
                   className="hidden"
+                  accept=".png,.svg,.web,.jpg"
                   ref={inputFileRef}
                   onChange={handleAddImageToPost}
                 />

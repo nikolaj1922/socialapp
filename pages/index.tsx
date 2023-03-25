@@ -1,13 +1,12 @@
 import Head from "next/head";
 import Sidebar from "@/components/Sidebar";
 import Feed from "@/components/Feed";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import Modal from "@/components/Modal";
 import { useAppSelector } from "@/store";
 
 export default function Home() {
-  const { data: session } = useSession();
   const { isOpen } = useAppSelector((state) => state.modal);
   return (
     <>
@@ -26,8 +25,8 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession(context);
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  const session = await getSession(res);
 
   if (!session) {
     return {

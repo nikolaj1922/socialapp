@@ -9,10 +9,7 @@ import {
   SwitchHorizontalIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import {
-  HeartIcon as HeartIconFilled,
-  ChatIcon as ChatIconFilled,
-} from "@heroicons/react/solid";
+import { HeartIcon as HeartIconFilled } from "@heroicons/react/solid";
 import {
   deleteDoc,
   doc,
@@ -24,14 +21,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { useSession } from "next-auth/react";
-import {
-  useAppSelector,
-  useAppDispatch,
-  setId,
-  openModal,
-  closeModal,
-} from "@/store";
-import Moment from "react-moment";
+import { useAppDispatch, setId, openModal } from "@/store";
 import { useRouter } from "next/router";
 import { db } from "@/firebase";
 import { ExtendedUserType } from "@/types/types";
@@ -45,7 +35,6 @@ interface Props {
 
 const Post = ({ id, post, postPage = false }: Props) => {
   const { data: session } = useSession();
-  const { modal } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
   const [comments, setComments] = useState<DocumentData[]>([]);
   const [likes, setLikes] = useState<DocumentData[]>([]);
@@ -126,7 +115,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
               className="h-11 w-11 rounded-full mr-3"
             />
           )}
-          <PostHeader post={post} />
+          <PostHeader post={post} postPage={postPage} />
           <div className="icon group flex-shrink-0 ml-auto">
             <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
           </div>
@@ -136,11 +125,17 @@ const Post = ({ id, post, postPage = false }: Props) => {
             {post?.text}
           </p>
         )}
-        <img
-          src={post?.image}
-          alt=""
-          className="rounded-2xl max-h-[700px] object-cover mr-2 object-top"
-        />
+        <div
+          className={`flex max-h-[350px] ${
+            postPage && "justify-center max-h-[430px]"
+          }`}
+        >
+          <img
+            src={post?.image}
+            alt=""
+            className="h-full max-w-[90%] rounded-md"
+          />
+        </div>
         <div
           className={`text-[#6e767d] flex justify-between w-10/12 ${
             postPage && "mx-auto"
@@ -170,7 +165,9 @@ const Post = ({ id, post, postPage = false }: Props) => {
               onClick={(e) => {
                 e.stopPropagation();
                 deleteDoc(doc(db, "posts", id));
-                router.push("/");
+                if (postPage) {
+                  router.push("/");
+                }
               }}
             >
               <div className="icon group-hover:bg-red-600/10">
@@ -201,7 +198,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
             </div>
             {likes.length > 0 && (
               <span
-                className={`group-hover:text-pink-600 text-sm ${
+                className={`text-sm group-hover:text-pink-600 ${
                   liked && "text-pink-600"
                 }`}
               >

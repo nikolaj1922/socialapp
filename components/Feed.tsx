@@ -10,10 +10,11 @@ import {
 import React, { useState, useEffect } from "react";
 import Input from "./Input";
 import Post from "./Post";
-import { IPost } from "@/types/types";
+import CircularProgress from "@mui/material/CircularProgress";
+import { grey } from "@mui/material/colors";
 
 const Feed = () => {
-  const [posts, setPosts] = useState<DocumentData[]>([]);
+  const [posts, setPosts] = useState<DocumentData[] | null>(null);
 
   useEffect(() => {
     onSnapshot(
@@ -33,11 +34,17 @@ const Feed = () => {
         </div>
       </div>
       <Input />
-      <div className="pb-72">
-        {posts.map(post => (
-          <Post key={post.id} id={post.id} post={post.data()} />
-        ))}
-      </div>
+      {posts ? (
+        <div className="pb-72">
+          {posts?.map((post) => (
+            <Post key={post.id} id={post.id} post={post.data()} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center mt-12">
+          <CircularProgress sx={{ color: grey[600] }} />
+        </div>
+      )}
     </div>
   );
 };

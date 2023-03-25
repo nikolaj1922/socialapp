@@ -1,6 +1,6 @@
 import { IPost } from "@/types/types";
 import { DocumentData } from "firebase/firestore";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 
 interface Props {
@@ -9,6 +9,20 @@ interface Props {
 }
 
 const PostHeader = ({ postPage = false, post }: Props) => {
+  const [seconds, setSeconds] = useState<number | null>(null);
+  const [date, setDate] = useState<Date | null>(null);
+
+  useEffect(() => {
+    const getTimestamp = () => {
+      setSeconds(post?.timestamp?.seconds);
+      setDate(new Date((seconds as number) * 1000));
+    };
+
+    if (!post && !seconds) return;
+
+    getTimestamp();
+  }, [post, seconds]);
+
   return (
     <div className="text-[#6e767d]">
       <div className="inline-block group">
@@ -20,12 +34,12 @@ const PostHeader = ({ postPage = false, post }: Props) => {
           {post?.username}
         </h4>
         <span className={`text-sm sm:text-[15px] ${!postPage && "ml-1.5"}`}>
-          @{post?.tag}
+          @{post?.userTag}
         </span>
       </div>{" "}
       ·{" "}
       <span className="hover:underline text-sm sm:text-[15px]">
-        <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+        {seconds && <Moment fromNow>{date as Date}</Moment>}
       </span>
       {!postPage && (
         <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">

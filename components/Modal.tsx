@@ -21,9 +21,12 @@ import { db } from "@/firebase";
 import PostHeader from "./PostHeader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { CircularProgress } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 export default function MyModal() {
   const { isOpen, postId } = useAppSelector((state) => state.modal);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const [post, setPost] = useState<IPost | DocumentData | null>(null);
   const [comment, setComment] = useState("");
@@ -40,18 +43,22 @@ export default function MyModal() {
 
   const sendComment = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (loading) return;
+    setLoading(true);
 
     await addDoc(collection(db, "posts", postId, "comments"), {
-      comment,
+      text: comment,
+      id: (session?.user as ExtendedUserType).uid,
       username: session?.user?.name,
       userTag: (session?.user as ExtendedUserType).tag,
-      userImage: session?.user?.image,
+      userImg: session?.user?.image,
       timestamp: serverTimestamp(),
     });
 
     setComment("");
     dispatch(closeModal());
-    // router.push(`/${postId}`);
+    setLoading(false);
+    router.push(`/${postId}`);
   };
 
   return (
@@ -83,7 +90,18 @@ export default function MyModal() {
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-black rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
+            <div
+              className={`relative inline-block align-bottom bg-black rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full ${
+                loading && "bg-neutral-900"
+              }`}
+            >
+              {loading && (
+                <>
+                  <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
+                    <CircularProgress sx={{ color: grey[600] }} />
+                  </div>
+                </>
+              )}
               <div className="flex items-center px-1.5 py-2 border-b border-gray-700">
                 <div
                   className="hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0"
