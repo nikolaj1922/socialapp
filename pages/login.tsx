@@ -1,6 +1,5 @@
 import { ClientSafeProvider } from "next-auth/react/types";
 import { signIn, getProviders } from "next-auth/react";
-import Logo from "./public/twitterLogo.jpg";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { FcGoogle } from "react-icons/fc";
@@ -15,7 +14,7 @@ const Login = ({ providers }: { providers: ClientSafeProvider }) => {
         <link rel="icon" href="/twitterLogo.jpg" />
       </Head>
       <Image
-        src={Logo}
+        src="/public/twitterLogo.jpg"
         width={150}
         height={150}
         className="object-contain"
