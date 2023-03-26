@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { IoLogoTwitter } from "react-icons/io";
 import Head from "next/head";
+import { ReactElement } from "react";
 
 const Login = ({ providers }: { providers: ClientSafeProvider }) => {
   return (
@@ -49,3 +50,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 export default Login;
+
+Login.getLayout = function PageLayout(page : ReactElement) {
+  return <>{page}</>;
+};
