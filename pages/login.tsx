@@ -1,9 +1,9 @@
 import { ClientSafeProvider } from "next-auth/react/types";
 import { signIn, getProviders } from "next-auth/react";
-import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { IoLogoTwitter } from "react-icons/io";
 import Head from "next/head";
 
 const Login = ({ providers }: { providers: ClientSafeProvider }) => {
@@ -13,13 +13,7 @@ const Login = ({ providers }: { providers: ClientSafeProvider }) => {
         <title>Social</title>
         <link rel="icon" href="/twitterLogo.jpg" />
       </Head>
-      <Image
-        src="/public/twitterLogo.jpg"
-        width={150}
-        height={150}
-        className="object-contain"
-        alt="logo"
-      />
+      <IoLogoTwitter color="white" size="9rem" />
       <div className="space-y-4">
         {Object.values(providers).map((provider) => (
           <div key={provider.name}>

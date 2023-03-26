@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import SidebarLink from "./SidebarLink";
 import { HomeIcon } from "@heroicons/react/solid";
 import {
@@ -15,6 +14,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { ExtendedUserType } from "@/types/types";
 import Link from "next/link";
+import { IoLogoTwitter } from "react-icons/io";
 
 const Sidebar = () => {
   const { data: session } = useSession();
@@ -27,7 +27,7 @@ const Sidebar = () => {
     <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full">
       <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
         <Link href="/">
-          <Image src="/public/twitterLogo.jpg" alt="Logo" width={30} />
+          <IoLogoTwitter color="white" size="2.5rem" />
         </Link>
       </div>
       <div className="space-y-1 mt-4 mb-2.5 xl:ml-24">
