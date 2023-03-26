@@ -15,7 +15,7 @@ const MobileSidebar = () => {
   };
 
   return (
-    <div className="fixed bottom-0 bg-black h-16 w-full flex items-center justify-between px-6 border-t border-gray-700">
+    <div className="fixed bottom-0 bg-black h-16 w-full flex items-center justify-between px-6 border-t border-l border-r border-gray-700">
       <div className="hoverAnimation h-14 w-14 flex justify-center items-center">
         <HashtagIcon className="h-8 text-white" />
       </div>

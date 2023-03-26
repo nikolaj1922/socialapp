@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import { db } from "@/firebase";
 import { ExtendedUserType } from "@/types/types";
 import PostHeader from "./PostHeader";
+import Image from "next/image";
 
 interface Props {
   id: string;
@@ -126,15 +127,17 @@ const Post = ({ id, post, postPage = false }: Props) => {
           </p>
         )}
         <div
-          className={`flex max-h-[350px] ${
+          className={`relative flex max-h-[350px] ${
             postPage && "justify-center max-h-[430px]"
           }`}
         >
-          {/* <img
+          <Image
             src={post?.image}
             alt=""
-            className="h-full max-w-[90%] rounded-md"
-          /> */}
+            height={350}
+            width={270}
+            className="object-contain rounded-md"
+          />
         </div>
         <div
           className={`text-[#6e767d] flex justify-between w-10/12 ${

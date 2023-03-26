@@ -103,7 +103,7 @@ const Comment = ({ id, comment, postId }: Props) => {
               alt="Comment image"
               className="object-contain rounded-md"
               height={250}
-              width={250}
+              width={200}
             />
           </div>
         )}
