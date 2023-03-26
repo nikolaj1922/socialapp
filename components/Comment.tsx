@@ -21,6 +21,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface Props {
   id: string;
@@ -32,6 +33,8 @@ const Comment = ({ id, comment, postId }: Props) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState<DocumentData[]>([]);
   const [liked, setLiked] = useState(false);
+
+  console.log(comment);
 
   useEffect(() => {
     onSnapshot(
@@ -93,6 +96,17 @@ const Comment = ({ id, comment, postId }: Props) => {
             <DotsHorizontalIcon className="h-5 text-[#6e767d] group-hover:text-[#1d9bf0]" />
           </div>
         </div>
+        {comment.image && (
+          <div className="relative flex justify-start rounded-md">
+            <Image
+              src={comment.image}
+              alt="Comment image"
+              className="object-contain rounded-md"
+              height={250}
+              width={250}
+            />
+          </div>
+        )}
         <div className="text-[#6e767d] flex justify-between items-center w-10/12">
           {comment.id === (session?.user as ExtendedUserType).uid ? (
             <div

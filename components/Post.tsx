@@ -96,7 +96,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
 
   return (
     <div
-      className="p-3 flex cursor-pointer border-b border-gray-700"
+      className="p-3 flex cursor-pointer border-b border-gray-700 max-w-2xl"
       onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (
@@ -121,7 +121,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
           </div>
         </div>
         {postPage && (
-          <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
+          <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5 w-full break-words px-4">
             {post?.text}
           </p>
         )}

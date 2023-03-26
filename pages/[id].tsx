@@ -2,7 +2,7 @@ import Sidebar from "@/components/Sidebar";
 import Head from "next/head";
 import Modal from "@/components/Modal";
 import { useAppSelector } from "@/store";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import {
   collection,
@@ -10,6 +10,8 @@ import {
   DocumentData,
   getDoc,
   onSnapshot,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import { db } from "@/firebase";
 import { IPost } from "@/types/types";
@@ -20,13 +22,13 @@ import { useEffect, useState } from "react";
 import Comment from "@/components/Comment";
 import CircularProgress from "@mui/material/CircularProgress";
 import { grey } from "@mui/material/colors";
+import Widgets from "@/components/Widgets";
 
 interface Props {
   post: IPost | DocumentData;
 }
 
 const PostPage = ({ post }: Props) => {
-  const { data: session } = useSession();
   const { isOpen } = useAppSelector((state) => state.modal);
   const router = useRouter();
   const [comments, setComments] = useState<IPost[] | DocumentData[] | null>(
@@ -36,7 +38,10 @@ const PostPage = ({ post }: Props) => {
 
   useEffect(() => {
     onSnapshot(
-      collection(db, "posts", id as string, "comments"),
+      query(
+        collection(db, "posts", id as string, "comments"),
+        orderBy("timestamp", "desc")
+      ),
       (snapshot) => {
         setComments(
           snapshot.docs.map((doc) => ({
@@ -71,7 +76,7 @@ const PostPage = ({ post }: Props) => {
           <Post id={id as string} post={post} postPage />
           {comments ? (
             comments.length > 0 && (
-              <div className="pb-72">
+              <div className="pb-20">
                 {comments.map((comment) => (
                   <Comment
                     key={comment.commentId}
@@ -88,7 +93,7 @@ const PostPage = ({ post }: Props) => {
             </div>
           )}
         </div>
-        {/* Widgets */}
+        <Widgets />
         {isOpen && <Modal />}
       </main>
     </>

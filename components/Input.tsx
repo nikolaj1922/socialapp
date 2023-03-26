@@ -22,17 +22,20 @@ import { useSession } from "next-auth/react";
 import { ExtendedUserType } from "@/types/types";
 import CircularProgress from "@mui/material/CircularProgress";
 import { grey } from "@mui/material/colors";
+import { useMediaQuery } from "@mui/material";
 
 const Input = () => {
   const [input, setInput] = useState("");
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [showEmojis, setShowEmojis] = useState(false);
-  const inputFileRef = useRef<HTMLInputElement | null>(null);
   const emojiRef = useRef<HTMLDivElement | null>(null);
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
+  const emojiIcon = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+  const isMobile = useMediaQuery("(max-width:640px)");
 
-  useOnClickOutside(emojiRef, () => setShowEmojis(false));
+  useOnClickOutside(emojiRef, emojiIcon, () => setShowEmojis(false));
 
   const addEmoji = (e: any) => {
     let sym = e.unified.split("-");
@@ -137,7 +140,7 @@ const Input = () => {
                 <input
                   type="file"
                   className="hidden"
-                  accept=".png,.svg,.web,.jpg"
+                  accept=".png,.svg,.web,.jpg,.jpeg"
                   ref={inputFileRef}
                   onChange={handleAddImageToPost}
                 />
@@ -145,15 +148,21 @@ const Input = () => {
               <div className="icon rotate-90">
                 <ChartBarIcon className="text-[#1d9bf0] h-[22px]" />
               </div>
-              <div className="icon" onClick={() => setShowEmojis(!showEmojis)}>
-                <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]" />
-              </div>
+              {!isMobile && (
+                <div
+                  className="icon"
+                  onClick={() => setShowEmojis((prevState) => !prevState)}
+                  ref={emojiIcon}
+                >
+                  <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]" />
+                </div>
+              )}
               <div className="icon">
                 <CalendarIcon className="text-[#1d9bf0] h-[22px]" />
               </div>
 
               {showEmojis && (
-                <div className="absolute top-[178px]" ref={emojiRef}>
+                <div className="absolute top-[130px]" ref={emojiRef}>
                   <Picker data={data} theme="dark" onEmojiSelect={addEmoji} />
                 </div>
               )}

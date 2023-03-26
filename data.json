@@ -1,0 +1,39 @@
+{
+  "trendingResults": [
+    {
+      "heading": "Gordon Moore, Intel co-founder and creator of Moore's Law, dies aged 94",
+      "description": "Mr Moore started working on semiconductors in the 1950s and co-founded the Intel Corporation.",
+      "img": "https://ichef.bbci.co.uk/news/976/cpsprodpb/0392/production/_129141900_intel-gordon-moore-8.jpg.webp",
+      "tags": ["#science"]
+    },
+    {
+      "heading": "Top Gear's chequered past: Crashes, controversy and Clarkson",
+      "description": "The popular motoring show has run for 240 episodes over 33 series.",
+      "img": "https://ichef.bbci.co.uk/news/976/cpsprodpb/2DDD/production/_129114711_936dd206597d0ccd7c34f6bc1d7475fe45ff00070_0_5760_38401000x667.jpg.webp",
+      "tags": ["#sport"]
+    },
+    {
+      "heading": "Ebola-like Marburg virus kills five people in Tanzania",
+      "description": "High fever is a common symptom of the deadly Ebola-like virus.",
+      "img": "",
+      "tags": ["#health"]
+    }
+  ],
+  "followResults": [
+    {
+      "username": "SpaceX",
+      "userImg": "https://asset.brandfetch.io/id2g3lee9x/idXX_e5k_s.jpeg",
+      "tag": "@SpaceX"
+    },
+    {
+      "username": "Elon Musk",
+      "userImg": "https://fleetpeople.es/wp-content/uploads/2021/11/elon-musk-tesla-4-1067x711.jpg",
+      "tag": "@elonmusk"
+    },
+    {
+      "username": "Tesla",
+      "userImg": "https://assets.materialup.com/uploads/922c35bd-940d-4f26-bbd5-ff8b7075f53b/preview.jpg",
+      "tag": "@Tesla"
+    }
+  ]
+}

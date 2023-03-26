@@ -5,6 +5,7 @@ import { getSession } from "next-auth/react";
 import { GetServerSideProps } from "next";
 import Modal from "@/components/Modal";
 import { useAppSelector } from "@/store";
+import Widgets from "@/components/Widgets";
 
 export default function Home() {
   const { isOpen } = useAppSelector((state) => state.modal);
@@ -17,8 +18,7 @@ export default function Home() {
       <main className="min-h-screen flex max-w-[1500px]">
         <Sidebar />
         <Feed />
-
-        {/* Widgets */}
+        <Widgets />
         {isOpen && <Modal />}
       </main>
     </>

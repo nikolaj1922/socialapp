@@ -24,7 +24,7 @@ const PostHeader = ({ postPage = false, post }: Props) => {
   }, [post, seconds]);
 
   return (
-    <div className="text-[#6e767d]">
+    <div className="text-[#6e767d] max-w-[520px]">
       <div className="inline-block group">
         <h4
           className={`font-bold text-[15px] sm:text-base text-[#d9d9d9] group-hover:underline ${
@@ -42,7 +42,7 @@ const PostHeader = ({ postPage = false, post }: Props) => {
         {seconds && <Moment fromNow>{date as Date}</Moment>}
       </span>
       {!postPage && (
-        <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
+        <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5 w-full break-words">
           {post?.text}
         </p>
       )}
