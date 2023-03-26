@@ -131,18 +131,18 @@ const Post = ({ id, post, postPage = false }: Props) => {
             postPage && "justify-center max-h-[400px]"
           }`}
         >
-          <Image
+          {/* <Image
             src={post?.image}
             alt=""
             height={350}
             width={270}
             className="object-contain rounded-md"
-          />
-          {/* <img
+          /> */}
+          <img
             src={post?.image}
             alt=""
             className="h-full max-w-[90%] rounded-md"
-          /> */}
+          />
         </div>
         <div
           className={`text-[#6e767d] flex justify-between w-10/12 ${
