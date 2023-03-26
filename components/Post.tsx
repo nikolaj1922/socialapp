@@ -140,7 +140,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
               alt=""
               height={400}
               width={400}
-              className={`!rounded-md !object-cover`}
+              className={`!rounded-md !object-cover -ml-[28px] sm:-ml-0 my-1`}
               onLoadingComplete={() => setIsImageLoaded(true)}
             />
           )}
