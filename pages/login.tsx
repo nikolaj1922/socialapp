@@ -5,12 +5,16 @@ import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import Head from "next/head";
 
 const Login = ({ providers }: { providers: ClientSafeProvider }) => {
-  const icons = [{ Google: "FcGoogle" }, { Github: "FaGithub" }];
 
   return (
     <div className="flex flex-col items-center space-y-20 pt-48">
+      <Head>
+        <title>Social</title>
+        <link rel="icon" href="/twitterLogo.jpg" />
+      </Head>
       <Image
         src={Logo}
         width={150}

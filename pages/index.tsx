@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Social App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Social</title>
+        <link rel="icon" href="/twitterLogo.jpg" />
       </Head>
       <main className="min-h-screen flex max-w-[1500px]">
         <Sidebar />

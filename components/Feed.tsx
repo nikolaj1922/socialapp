@@ -35,7 +35,7 @@ const Feed = () => {
       </div>
       <Input />
       {posts ? (
-        <div className="pb-20">
+        <div className="pb-20 sm:pb-0">
           {posts?.map((post) => (
             <Post key={post.id} id={post.id} post={post.data()} />
           ))}

@@ -39,6 +39,9 @@ const Widgets = () => {
                 alt="Account pic"
                 fill
                 className="rounded-full object-cover object-top"
+                sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
               />
             </div>
             <div className="ml-4 leading-5 group">

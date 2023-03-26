@@ -57,9 +57,9 @@ const PostPage = ({ post }: Props) => {
     <>
       <Head>
         <title>
-          {post?.username} on Twitter: "{post?.text}"
+          {post?.username} on Social: "{post?.text}"
         </title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/twitterLogo.jpg" />
       </Head>
       <main className="min-h-screen flex max-w-[1500px]">
         <Sidebar />
@@ -76,7 +76,7 @@ const PostPage = ({ post }: Props) => {
           <Post id={id as string} post={post} postPage />
           {comments ? (
             comments.length > 0 && (
-              <div className="pb-20">
+              <div className="pb-20 sm:pb-0">
                 {comments.map((comment) => (
                   <Comment
                     key={comment.commentId}
