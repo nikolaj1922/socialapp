@@ -22,6 +22,8 @@ import {
 import { db } from "@/firebase";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { CircularProgress } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 interface Props {
   id: string;
@@ -33,6 +35,7 @@ const Comment = ({ id, comment, postId }: Props) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState<DocumentData[]>([]);
   const [liked, setLiked] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   console.log(comment);
 
@@ -97,14 +100,24 @@ const Comment = ({ id, comment, postId }: Props) => {
           </div>
         </div>
         {comment.image && (
-          <div className="relative flex justify-start rounded-md">
-            <Image
-              src={comment.image}
-              alt="Comment image"
-              className="object-contain rounded-md"
-              height={250}
-              width={200}
-            />
+          <div className="relative flex rounded-md max-h-[350px]">
+            {comment.image && (
+              <Image
+                src={comment.image}
+                alt="Comment image"
+                className="!rounded-md !object-cover object-top"
+                height={350}
+                width={300}
+                onLoadingComplete={() => setIsImageLoaded(true)}
+              />
+            )}
+            {!isImageLoaded && (
+              <CircularProgress
+                className="!absolute !top-1/2 !left-[45%] !-translate-x-1/2 !-translate-y-1/2"
+                sx={{ color: grey[600] }}
+                size={24}
+              />
+            )}
           </div>
         )}
         <div className="text-[#6e767d] flex justify-between items-center w-10/12">

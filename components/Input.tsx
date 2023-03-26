@@ -140,7 +140,7 @@ const Input = () => {
                 <input
                   type="file"
                   className="hidden"
-                  accept=".png,.svg,.web,.jpg,.jpeg"
+                  accept="image/*"
                   ref={inputFileRef}
                   onChange={handleAddImageToPost}
                 />

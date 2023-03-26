@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { IPost } from "@/types/types";
 import {
   ChartBarIcon,
@@ -27,6 +27,8 @@ import { db } from "@/firebase";
 import { ExtendedUserType } from "@/types/types";
 import PostHeader from "./PostHeader";
 import Image from "next/image";
+import { CircularProgress } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
 interface Props {
   id: string;
@@ -41,6 +43,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
   const [likes, setLikes] = useState<DocumentData[]>([]);
   const [liked, setLiked] = useState(false);
   const router = useRouter();
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     onSnapshot(
@@ -127,22 +130,32 @@ const Post = ({ id, post, postPage = false }: Props) => {
           </p>
         )}
         <div
-          className={`flex max-h-[300px] ${
-            postPage && "justify-center max-h-[400px]"
+          className={`relative flex max-h-[400px]  ${
+            postPage && "ml-14 max-h-[550px]"
           }`}
         >
-          {/* <Image
-            src={post?.image}
-            alt=""
-            height={350}
-            width={270}
-            className="object-contain rounded-md"
-          /> */}
-          <img
+          {post?.image && (
+            <Image
+              src={post?.image}
+              alt=""
+              height={400}
+              width={400}
+              className={`!rounded-md !object-cover`}
+              onLoadingComplete={() => setIsImageLoaded(true)}
+            />
+          )}
+          {!isImageLoaded && (
+            <CircularProgress
+              className="!absolute !top-1/2 !left-[45%] !-translate-x-1/2 !-translate-y-1/2"
+              sx={{ color: grey[600] }}
+              size={24}
+            />
+          )}
+          {/* <img
             src={post?.image}
             alt=""
             className="h-full max-w-[90%] rounded-md"
-          />
+          /> */}
         </div>
         <div
           className={`text-[#6e767d] flex justify-between w-10/12 ${
