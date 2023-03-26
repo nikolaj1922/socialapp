@@ -1,6 +1,6 @@
 import { ClientSafeProvider } from "next-auth/react/types";
 import { signIn, getProviders } from "next-auth/react";
-import Logo from "../public/twitterLogo.jpg";
+import Logo from "./public/twitterLogo.jpg";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import { FcGoogle } from "react-icons/fc";
@@ -8,7 +8,6 @@ import { FaGithub } from "react-icons/fa";
 import Head from "next/head";
 
 const Login = ({ providers }: { providers: ClientSafeProvider }) => {
-
   return (
     <div className="flex flex-col items-center space-y-20 pt-48">
       <Head>

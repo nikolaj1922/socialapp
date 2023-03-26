@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "../public/twitterLogo.jpg";
+import Logo from "./public/twitterLogo.jpg";
 import SidebarLink from "./SidebarLink";
 import { HomeIcon } from "@heroicons/react/solid";
 import {
