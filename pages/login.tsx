@@ -11,7 +11,7 @@ const Login = ({ providers }: { providers: ClientSafeProvider }) => {
     <div className="flex flex-col items-center space-y-20 pt-48">
       <Head>
         <title>Social</title>
-        <link rel="icon" href="/twitterLogo.jpg" />
+        <link rel="icon" href="./public/twitterLogo.jpg" />
       </Head>
       <IoLogoTwitter color="white" size="9rem" />
       <div className="space-y-4">

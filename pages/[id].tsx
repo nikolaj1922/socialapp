@@ -59,7 +59,7 @@ const PostPage = ({ post }: Props) => {
         <title>
           {post?.username} on Social: "{post?.text}"
         </title>
-        <link rel="icon" href="/twitterLogo.jpg" />
+        <link rel="icon" href="./public/twitterLogo.jpg" />
       </Head>
       <main className="min-h-screen flex max-w-[1500px]">
         <Sidebar />

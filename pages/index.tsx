@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Head>
         <title>Social</title>
-        <link rel="icon" href="/twitterLogo.jpg" />
+        <link rel="icon" href="./public/twitterLogo.jpg" />
       </Head>
       <main className="min-h-screen flex max-w-[1500px]">
         <Sidebar />
