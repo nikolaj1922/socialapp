@@ -140,13 +140,14 @@ const Post = ({ id, post, postPage = false }: Props) => {
               alt=""
               height={400}
               width={400}
+              sizes="100vw"
               className={`!rounded-md !object-cover -ml-[28px] sm:-ml-0 my-1`}
               onLoadingComplete={() => setIsImageLoaded(true)}
             />
           )}
-          {!isImageLoaded && (
+          {!isImageLoaded && post?.image && (
             <CircularProgress
-              className="!absolute !top-1/2 !left-[45%] !-translate-x-1/2 !-translate-y-1/2"
+              className="!absolute !left-[42%] !top-1/2 sm:!left-[45%] !-translate-x-1/2 !-translate-y-1/2"
               sx={{ color: grey[600] }}
               size={24}
             />
