@@ -76,7 +76,7 @@ const PostPage = ({ post }: Props) => {
           <Post id={id as string} post={post} postPage />
           {comments ? (
             comments.length > 0 && (
-              <div className="pb-20 sm:pb-0">
+              <div className="pb-44 sm:pb-0">
                 {comments.map((comment) => (
                   <Comment
                     key={comment.commentId}
