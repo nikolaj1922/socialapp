@@ -100,12 +100,9 @@ const PostPage = ({ post }: Props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  res,
-}) => {
-  const post = await getDoc(doc(db, "posts", params?.id as string));
-  const session = await getSession(res);
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const post = await getDoc(doc(db, "posts", context.params?.id as string));
+  const session = await getSession(context);
 
   if (!session) {
     return {
