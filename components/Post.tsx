@@ -147,7 +147,7 @@ const Post = ({ id, post, postPage = false }: Props) => {
           )}
           {!isImageLoaded && post?.image && (
             <CircularProgress
-              className="!absolute !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2"
+              className="!absolute !top-1/2 !left-1/2 !-translate-x-1/2 !-translate-y-1/2 -ml-[28px] sm:-ml-0 my-1"
               sx={{ color: grey[600] }}
               size={24}
             />
